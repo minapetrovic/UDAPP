@@ -94,6 +94,9 @@ public class Klijenti extends Thread {
 	private void download() {
 		try {
 			String key = clientInput.readLine();
+			if(key.equals(">>QUIT")) {
+				return;
+			}
 			boolean state = false;
 
 			for (int i = 0; i < Server.sviKlijenti.size(); i++) {

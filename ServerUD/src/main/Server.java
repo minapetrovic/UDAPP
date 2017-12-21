@@ -67,14 +67,12 @@ public class Server {
 				usersToList.close();
 
 			} catch (ClassNotFoundException e) {
-				System.out.println("Nije pronadjena klasa!");
+				System.out.println("Class not found.");
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("File not found!");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error while reading from file!");
 		}
 	}
 }
