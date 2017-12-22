@@ -94,11 +94,19 @@ public class Klijenti extends Thread {
 	private void download() {
 		try {
 			String key = clientInput.readLine();
-			if(key.equals(">>QUIT")) {
+			if (key.equals(">>QUIT")) {
 				return;
 			}
-			boolean state = false;
 
+			for (int i = 0; i < Server.sviKlijenti.size(); i++) {
+				for (int j = 0; j < Server.sviKlijenti.get(i).uploadFiles.size(); j++) {
+					if (!Server.sviKlijenti.get(i).uploadFiles.contains(key)) {
+						clientOutput.println("Invalid key.");
+					}
+				}
+			}
+
+			boolean state = false;
 			for (int i = 0; i < Server.sviKlijenti.size(); i++) {
 				for (int j = 0; j < Server.sviKlijenti.get(i).uploadFiles.size(); j++) {
 					if (Server.sviKlijenti.get(i).uploadFiles.get(j).equals(key)) {
@@ -110,7 +118,7 @@ public class Klijenti extends Thread {
 			}
 
 			if (state == true) {
-				//clientOutput.println("Here is your requested file " + key + ".txt!");
+				// clientOutput.println("Here is your requested file " + key + ".txt!");
 				byte[] buffer = new byte[1024];
 				File file = new File(key + ".txt");
 				if (file.exists()) {
@@ -182,7 +190,7 @@ public class Klijenti extends Thread {
 	}
 
 	private void logout() {
-		
+
 		this.username = null;
 		// this.password = null;
 		clientOutput.println("User successfully logged out.");
